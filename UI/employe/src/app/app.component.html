@@ -1,0 +1,40 @@
+<!-- employee-list.component.html -->
+
+<div class="container">
+  <form [formGroup]="emForm" class="add-form">
+    <div>
+      <input type="text" placeholder="Enter employee name" formControlName="name">
+    </div>
+    <div>
+      <input type="text" placeholder="Department" formControlName="department">
+    </div>
+    <div>
+      <input type="number" placeholder="Salary" formControlName="salary">
+    </div>
+    <button (click)="addEmployee()">Save</button>
+  </form>
+
+  <table class="employee-table">
+    <thead>
+      <tr>
+        <th (click)="sortBy('name')">Name</th>
+        <th (click)="sortBy('department')">Department</th>
+        <th (click)="sortBy('salary')">Salary</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.department }}</td>
+        <td>{{ employee.salary }}</td>
+        <td>
+          <button (click)="toggleEditUpdateMode(employee)">
+            {{ editingMode && selectedEmployee._id === employee._id ? 'Update' : 'Edit' }}
+          </button>
+          <button (click)="deleteEmployee(employee._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
